@@ -3,6 +3,7 @@ using Smod2.API;
 using Smod2.EventHandlers;
 using Smod2.Events;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace SF_s_Default_Items {
     class DIEventHandler : IEventHandlerSetRole {
@@ -44,12 +45,20 @@ namespace SF_s_Default_Items {
                 item.Remove();
             }
 
-            foreach (int item in items) {
-                if (item == -1) {
-                    continue;
-                }
+            Timer operate = new Timer {
+                Interval = 50,
+                AutoReset = false,
+                Enabled = true
+            }
 
-                ev.Player.GiveItem((ItemType) item);
+            operate.elapsed += delegate {
+                foreach (int item in items) {
+                    if (item == -1) {
+                        continue;
+                    }
+
+                    ev.Player.GiveItem((ItemType) item);
+                }
             }
         }
 
