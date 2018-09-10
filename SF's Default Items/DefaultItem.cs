@@ -22,7 +22,7 @@ namespace SF_s_Default_Items {
         }
 
         public override void Register() {
-            this.AddEventHandlers(new DIEventHandler(this));
+            this.AddEventHandlers(new DIEventHandler(this), Smod2.Events.Priority.Lowest);
             this.AddConfig(new Smod2.Config.ConfigSetting("default_item_classd", new int[] { -1 }, Smod2.Config.SettingType.NUMERIC_LIST, true, ""));
             this.AddConfig(new Smod2.Config.ConfigSetting("default_item_ntfscientist", new int[] { 7, 12, 14, 19, 20, 25, 27 }, Smod2.Config.SettingType.NUMERIC_LIST, true, ""));
             this.AddConfig(new Smod2.Config.ConfigSetting("default_item_scientist", new int[] { 1, 14 }, Smod2.Config.SettingType.NUMERIC_LIST, true, ""));
