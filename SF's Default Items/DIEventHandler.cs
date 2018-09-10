@@ -52,6 +52,10 @@ namespace SF_s_Default_Items {
             };
 
             operate.Elapsed += delegate {
+                foreach (Item item in ev.Player.GetInventory()) {
+                    item.Remove();
+                }
+
                 foreach (int item in items) {
                     if (item == -1) {
                         continue;
