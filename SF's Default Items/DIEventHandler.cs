@@ -49,9 +49,9 @@ namespace SF_s_Default_Items {
                 Interval = 50,
                 AutoReset = false,
                 Enabled = true
-            }
+            };
 
-            operate.elapsed += delegate {
+            operate.Elapsed += delegate {
                 foreach (int item in items) {
                     if (item == -1) {
                         continue;
@@ -59,7 +59,7 @@ namespace SF_s_Default_Items {
 
                     ev.Player.GiveItem((ItemType) item);
                 }
-            }
+            };
         }
 
         private static string ConvertRoleIDToString(Role role) {
