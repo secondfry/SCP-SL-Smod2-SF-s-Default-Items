@@ -12,18 +12,32 @@ namespace SF_s_Default_Items {
             (int) Team.SCP,
             (int) Team.SPECTATOR
         };
+        private List<Role> rolesWithoutInventory = new List<Role> {
+            Role.SCP_049,
+            Role.SCP_049_2,
+            Role.SCP_079,
+            Role.SCP_096,
+            Role.SCP_106,
+            Role.SCP_173,
+            Role.SCP_939_53,
+            Role.SCP_939_89,
+            Role.SPECTATOR,
+            Role.TUTORIAL,
+            Role.UNASSIGNED,
+            Role.ZOMBIE,
+        };
 
         public DIEventHandler(DefaultItem plugin) {
             this.plugin = plugin;
         }
 
         public void OnSetRole(PlayerSetRoleEvent ev) {
-            if (this.teamsWithoutInventory.Contains((int) ev.TeamRole.Team)) {
+            if (this.rolesWithoutInventory.Contains(ev.Role)) {
                 return;
             }
 
             IConfigFile config = ConfigManager.Manager.Config;
-            string shard = DIEventHandler.ConvertRoleIDToString((int) ev.Role);
+            string shard = DIEventHandler.ConvertRoleIDToString(ev.Role);
             int[] items = config.GetIntListValue("default_item_" + shard, true);
 
             foreach (Item item in ev.Player.GetInventory()) {
@@ -39,25 +53,25 @@ namespace SF_s_Default_Items {
             }
         }
 
-        private static string ConvertRoleIDToString(int roleID) {
-            switch (roleID) {
-                case (int) Role.CLASSD:
+        private static string ConvertRoleIDToString(Role role) {
+            switch (role) {
+                case Role.CLASSD:
                     return "classd";
-                case (int) Role.NTF_SCIENTIST:
+                case Role.NTF_SCIENTIST:
                     return "ntfscientist";
-                case (int) Role.SCIENTIST:
+                case Role.SCIENTIST:
                     return "scientist";
-                case (int) Role.CHAOS_INSUGENCY:
+                case Role.CHAOS_INSUGENCY:
                     return "ci";
-                case (int) Role.NTF_LIEUTENANT:
+                case Role.NTF_LIEUTENANT:
                     return "lieutenant";
-                case (int) Role.NTF_COMMANDER:
+                case Role.NTF_COMMANDER:
                     return "commander";
-                case (int) Role.NTF_CADET:
+                case Role.NTF_CADET:
                     return "cadet";
-                case (int) Role.FACILITY_GUARD:
+                case Role.FACILITY_GUARD:
                     return "guard";
-                case (int) Role.TUTORIAL:
+                case Role.TUTORIAL:
                     return "tutorial";
             }
 
